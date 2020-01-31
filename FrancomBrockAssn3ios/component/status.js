@@ -19,7 +19,7 @@ export default class Status extends React.Component {
     description: {
       fontSize: 20,
       fontWeight: '600',
-      color: 'green',
+      color: 'orange',
       textAlign: 'left',
       marginLeft: 50,
     },

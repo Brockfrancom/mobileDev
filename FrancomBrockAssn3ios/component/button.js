@@ -19,7 +19,6 @@ export default class CustomButton extends React.Component {
       padding: 27,
     },
     buttonL: {
-      backgroundColor: 'rgb('+((Math.random()*1000)%255)+','+((Math.random()*1000)%100)+','+((Math.random()*1000)%255)+')',
       borderRadius: 10,
       flex: 1,
       margin: 3,
@@ -36,11 +35,12 @@ export default class CustomButton extends React.Component {
       opacity: 0,
     },
   });
-
   render() {
     const { title, onPress, x, y, myX, myY, level } = this.props;
     let theFunction = 1;
-    let theStyle = this.styles.buttonL;
+    let theStyle = [this.styles.buttonL, {backgroundColor:'rgb('+((Math.random()*1000)%255)+','+
+                            ((Math.random()*1000)%50)+','+
+                            ((Math.random()*1000)%255)+')'}];
     if(this.props.myX === this.props.x && this.props.myY === this.props.y){
       theFunction = 0;
       theStyle = this.styles.buttonW;

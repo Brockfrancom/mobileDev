@@ -4,11 +4,8 @@ import {
   StyleSheet,
   View,
   StatusBar,
-  ScrollView,
-  Text,
 } from 'react-native';
 import Status from './component/status';
-import CustomButton from './component/button';
 import GameBoard from './component/gameBoard';
 import LevelScreen from './component/levelScreen'
 
@@ -17,8 +14,9 @@ export default class App extends React.Component {
     score: 0,
     timer: 10,
     levelScreen: true,
-    level: 2,
+    level: 1,
     winner: null,
+    timerVar: null,
   }
   increment = (state) => {
     this.setState((state) => {
@@ -26,46 +24,52 @@ export default class App extends React.Component {
       return(state);
     });
   }
-  decrement = (state) => {
+  lose = (state) => {
     this.setState((state) => {
+      clearInterval(state.timerVar);
+      state.timer = 10;
       state.winner = false;
       state.score = 0;
+      state.level = 1;
       state.levelScreen = true;
       return(state);
     });
   }
-  // update = (state) => {
-  //   this.setState((state) => {
-  //     const newState = { ...state };
-  //     //newState.timer -= 1;
-  //     return newState;
-  //   });
-  // }
-  start = (state) => {
+  functionForTimer = (state) => {
+    const newState = {...state};
+    newState.levelScreen = true;
+    newState.score = 0;
+    newState.timer = 10;
+    if(state.score >= 15 && state.level == 1){
+      newState.level += 1;
+      newState.winner = true;
+      return newState;
+    }
+    else if(state.score >= 20 && state.level == 2){
+      newState.level = 1;
+      newState.winner = true;
+      return newState;
+    }
+    newState.winner = false;
+    newState.level = 1;
+    return newState;
+  }
+  update = () => {
     this.setState((state) => {
       const newState = { ...state };
-      //This allows you to move from level one to two.
-      if(state.level == 2 && state.winner != null){
-        newState.level = 1;
+      newState.timer -= 1;
+      if(newState.timer == 0) {
+        clearInterval(newState.timerVar);
+        return this.functionForTimer(newState);
       }
-      newState.score = 0;
-      newState.levelScreen = false;
-      //setInterval(this.update(newState),1);
       return newState;
     });
   }
-  functionForTimer = (state) => {
+  start = (state) => {
     this.setState((state) => {
-      const newState = { ...state };
-      if(state.score >= 10 && state.level == 1){
-        newState.level += 1;
-        newState.winner = true;
-      }
-      else if(state.score >= 20 && state.level == 2){
-        newState.winner = true;
-      }
-      newState.levelScreen = true;
-      newState.score = 0;
+      const newState = {...state};
+      newState.levelScreen = false;
+      newState.timerVar = setInterval(this.update,1000);
       return newState;
     });
   }
@@ -98,10 +102,11 @@ export default class App extends React.Component {
             <Status score={this.state.score} timer={this.state.timer}/>
           </View>
           <GameBoard
+            score={this.state.score}
             level={this.state.level}
             x={(Math.floor(Math.random(0,1)*10)%5)}
             y={(Math.floor(Math.random(0,1)*10)%8)}
-            functions={[this.increment, this.decrement]}
+            functions={[this.increment, this.lose]}
           />
         </SafeAreaView>
       </>

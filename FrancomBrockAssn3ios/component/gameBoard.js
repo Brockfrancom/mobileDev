@@ -10,22 +10,73 @@ import CustomButton from './button'
 import GameRow from './gameRow'
 
 export default class GameBoard extends React.Component {
-  styles = StyleSheet.create({
-  });
-
+  shouldComponentUpdate(nextProps, nextState) {
+    if(this.props.score != nextProps.score){
+      return true;
+    }
+    return false;
+  }
   render() {
     const { styles } = this;
-    const { functions, level, x, y } = this.props;
+    const { score, functions, level, x, y } = this.props;
     return (
       <>
-        <GameRow level={this.props.level} x={this.props.x} y={this.props.y} myY={0} functions={this.props.functions}/>
-        <GameRow level={this.props.level} x={this.props.x} y={this.props.y} myY={1} functions={this.props.functions}/>
-        <GameRow level={this.props.level} x={this.props.x} y={this.props.y} myY={2} functions={this.props.functions}/>
-        <GameRow level={this.props.level} x={this.props.x} y={this.props.y} myY={3} functions={this.props.functions}/>
-        <GameRow level={this.props.level} x={this.props.x} y={this.props.y} myY={4} functions={this.props.functions}/>
-        <GameRow level={this.props.level} x={this.props.x} y={this.props.y} myY={5} functions={this.props.functions}/>
-        <GameRow level={this.props.level} x={this.props.x} y={this.props.y} myY={6} functions={this.props.functions}/>
-        <GameRow level={this.props.level} x={this.props.x} y={this.props.y} myY={7} functions={this.props.functions}/>
+        <GameRow
+          level={this.props.level}
+          x={this.props.x}
+          y={this.props.y}
+          myY={0}
+          functions={this.props.functions}
+        />
+        <GameRow
+          level={this.props.level}
+          x={this.props.x}
+          y={this.props.y}
+          myY={1}
+          functions={this.props.functions}
+        />
+        <GameRow
+          level={this.props.level}
+          x={this.props.x}
+          y={this.props.y}
+          myY={2}
+          functions={this.props.functions}
+        />
+        <GameRow
+          level={this.props.level}
+          x={this.props.x}
+          y={this.props.y}
+          myY={3}
+          functions={this.props.functions}
+        />
+        <GameRow
+          level={this.props.level}
+          x={this.props.x}
+          y={this.props.y}
+          myY={4}
+          functions={this.props.functions}
+        />
+        <GameRow
+          level={this.props.level}
+          x={this.props.x}
+          y={this.props.y}
+          myY={5}
+          functions={this.props.functions}
+        />
+        <GameRow
+          level={this.props.level}
+          x={this.props.x}
+          y={this.props.y}
+          myY={6}
+          functions={this.props.functions}
+        />
+        <GameRow
+          level={this.props.level}
+          x={this.props.x}
+          y={this.props.y}
+          myY={7}
+          functions={this.props.functions}
+        />
       </>
     );
   }

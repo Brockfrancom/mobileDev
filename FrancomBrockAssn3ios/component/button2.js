@@ -10,22 +10,25 @@ import {
 export default class CustomButton extends React.Component {
   styles = StyleSheet.create({
     buttonW: {
-      fontSize: 20,
-      fontWeight: '600',
-      backgroundColor: 'green',
+      backgroundColor: 'orange',
       borderRadius: 5,
       margin: 2,
       borderColor: 'black',
       borderWidth: 2,
       padding: 15,
     },
+    titleFont: {
+      fontSize: 20,
+      fontWeight: '600',
+
+    },
   });
   render() {
     const { title, onPress } = this.props;
     return (
       <TouchableOpacity onPress={this.props.onPress}>
-        <View>
-          <Text style={this.styles.buttonW}>{title}</Text>
+        <View style={this.styles.buttonW}>
+          <Text style={this.styles.titleFont}>{title}</Text>
         </View>
       </TouchableOpacity>
     );

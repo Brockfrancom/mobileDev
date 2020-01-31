@@ -30,23 +30,24 @@ export default class LevelScreen extends React.Component {
   });
 
   render(){
-    const{functions, level, winner } = this.props;
+    const{ functions, level, winner } = this.props;
     let titleVar = "Start";
     let message = "Click the green box to gain points!"
-    if (winner != null){
-      if (winner){
-        message = "Congratulations you're a winner!"
-        if (this.props.level == 2){
-          titleVar = "Play Again?";
-        }
-        else {
-          titleVar = "Continue?";
-        }
-      }
-      else {
-        message = "You're a loser."
+    if (winner){
+      message = "Congratulations you're a winner!"
+      if (this.props.level == 3){
         titleVar = "Play Again?";
       }
+      else {
+        titleVar = "Continue?";
+      }
+    }
+    else if(winner == null){
+      //Do nothing
+    }
+    else {
+      message = "You're a loser."
+      titleVar = "Play Again?";
     }
     return(
       <SafeAreaView style={this.styles.containerH}>
