@@ -34,19 +34,20 @@ export default class LevelScreen extends React.Component {
     let titleVar = "Start";
     let message = "Click the green box to gain points!"
     if (winner){
-      message = "Congratulations you're a winner!"
+      message = "Congratulations you're a winner! \n Keep pressing the green button!"
       if (this.props.level == 3){
         titleVar = "Play Again?";
+        message = "Congratulations you're a winner! \n     You beat the game, nerd."
       }
       else {
-        titleVar = "Continue?";
+        titleVar = "Continue";
       }
     }
     else if(winner == null){
       //Do nothing
     }
     else {
-      message = "You're a loser."
+      message = "You're back to level 1.\n        You're a loser. "
       titleVar = "Play Again?";
     }
     return(
