@@ -16,7 +16,10 @@ export default class App extends React.Component {
     levelScreen: true,
     level: 1,
     winner: null,
-    timerVar: null,
+  }
+  timerVar = null;
+  componentWillUnmount() {
+    clearInterval(timerVar);
   }
   increment = (state) => {
     this.setState((state) => {
@@ -26,7 +29,7 @@ export default class App extends React.Component {
   }
   lose = (state) => {
     this.setState((state) => {
-      clearInterval(state.timerVar);
+      clearInterval(timerVar);
       state.timer = 10;
       state.winner = false;
       state.score = 0;
@@ -59,7 +62,7 @@ export default class App extends React.Component {
       const newState = { ...state };
       newState.timer -= 1;
       if(newState.timer == 0) {
-        clearInterval(newState.timerVar);
+        clearInterval(timerVar);
         return this.functionForTimer(newState);
       }
       return newState;
@@ -69,7 +72,7 @@ export default class App extends React.Component {
     this.setState((state) => {
       const newState = {...state};
       newState.levelScreen = false;
-      newState.timerVar = setInterval(this.update,1000);
+      timerVar = setInterval(this.update,1000);
       return newState;
     });
   }
