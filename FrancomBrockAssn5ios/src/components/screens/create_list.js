@@ -1,13 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { createList } from '../../actions/add_list';
 import { Container, Input, Form, Item, Label, Textarea, Button, Text } from 'native-base';
 import { StyleSheet } from 'react-native';
+import { createList } from '../../actions/lists';
+import IconList from '../icon_list';
 
 export class CreateList extends React.Component {
   state = {
     title: '',
-    description: '',
+    icon: '',
   }
 
   styles = StyleSheet.create({
@@ -22,7 +23,7 @@ export class CreateList extends React.Component {
   save = () => {
     this.props.createList(
       this.state.title,
-      this.state.description,
+      this.state.icon,
     );
     this.props.navigation.goBack();
   }
@@ -38,13 +39,7 @@ export class CreateList extends React.Component {
               onChangeText={text => this.update('title', text)}
             />
           </Item>
-          <Item floatingLabel>
-            <Label>Description</Label>
-            <Input
-              value={this.state.description}
-              onChangeText={text => this.update('description', text)}
-            />
-          </Item>
+          <IconList onPress={() => console.log(this.state)}/>
         </Form>
         <Container style={this.styles.saveButtonContainer}>
           <Button onPress={this.save}><Text>Save</Text></Button>
