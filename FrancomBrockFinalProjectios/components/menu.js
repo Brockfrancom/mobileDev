@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import {
   View,
   Text,
@@ -33,19 +32,15 @@ export default class Menu extends React.Component {
 
   }
 
-  static navigationOptions = {
-      title: 'Profile',
-    };
   render() {
     const { navigation } = this.props;
     const { navigate } = this.props;
     return (
       <View>
         <Text style={this.styles.name}>Welcome, Brock!</Text>
-        <Button title="Record New Activity" onPress={this.recordActivity}/>
-        <Button title="View Activities" onPress={this.viewActivities}/>
-        <Button title="Rewards" onPress={this.rewards}/>
-        <Button title="Profile" onPress={() => navigate('Profile')}/>
+        <Button title="Record New Adventure" onPress={this.recordActivity}/>
+        <Button title="View Adventures" onPress={this.viewActivities}/>
+        <Button title="Goals" onPress={this.rewards}/>
       </View>
     );
   }

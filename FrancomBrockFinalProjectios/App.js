@@ -1,35 +1,32 @@
 import React from 'react';
-import {
- SafeAreaView,
- StyleSheet,
- View,
- StatusBar,
- ScrollView,
- Text,
-} from 'react-native';
-import Button from './components/common/button';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { Provider } from 'react-redux';
+import { Button, Text, Container } from 'native-base';
+import { StyleSheet } from 'react-native';
+// import Lists from './src/components/screens/lists';
+// import ListDetails from './src/components/screens/list_details';
+// import CreateList from './src/components/screens/create_list';
+import store from './components/store/store';
+//import Button from './components/common/button';
 import Menu from './components/menu';
 import Profile from './components/profile';
 
-import {createAppContainer} from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack';
+const Stack = createStackNavigator();
 
-const MainNavigator = createStackNavigator({
-  Profile: {screen: Profile},
-});
-const test = createAppContainer(MainNavigator)
 export default class App extends React.Component {
  render() {
-   const { styles } = this;
    return (
-     <>
-       <StatusBar barStyle="dark-content"/>
-       <SafeAreaView>
-       <ScrollView>
-       <Menu navigate={MainNavigator}/>
-       </ScrollView>
-       </SafeAreaView>
-     </>
+     <Provider store={store}>
+       <NavigationContainer>
+         <Stack.Navigator>
+           <Stack.Screen name="Menu" component={Menu}/>
+           <Stack.Screen name="Record Adventure" component={Menu}/>
+           <Stack.Screen name="View Adventures" component={Menu}/>
+           <Stack.Screen name="Goals" component={Menu}/>
+         </Stack.Navigator>
+       </NavigationContainer>
+     </Provider>
    );
  }
 }
